@@ -1,0 +1,28 @@
+PHANTOM 9.0 — LOCAL OLLAMA TIMEOUT FIX
+
+This is a small compatibility patch for the existing PHANTOM 9.0 installation.
+It changes only app/local_ai.py. It does not alter the database, alerts, incidents,
+reports, detection rules, or dashboard UI.
+
+Changes:
+- Raises Ollama generation/read timeout from 120 to 300 seconds for CPU-only systems.
+- Limits the evidence context to 6,000 characters to avoid oversized prompts.
+- Limits output to 256 tokens and uses a 4,096-token context window.
+- Keeps the model warm for 10 minutes after a request.
+- Returns clearer local-AI errors while keeping PHANTOM's other functions available.
+
+INSTALL:
+1. Stop the PHANTOM server in its terminal with Ctrl+C.
+2. Back up your existing PHANTOM folder.
+3. Extract this ZIP into the existing PHANTOM project folder.
+4. Replace app/local_ai.py when prompted. Do not replace or delete data/, .venv,
+   .env, databases, or any other files.
+5. Restart from the project folder:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+6. Open PHANTOM, press Ctrl+F5, and retry Investigation > Evidence Intelligence.
+
+Ollama must be running locally at the configured OLLAMA_URL (default
+http://127.0.0.1:11434) and the configured model must be installed.
+
+This patch improves timeout tolerance; it cannot guarantee a response if Ollama
+is overloaded, stopped, or unreachable. AI output remains advisory, not a verdict.

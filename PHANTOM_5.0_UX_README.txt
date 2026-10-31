@@ -1,0 +1,26 @@
+PHANTOM 5.0 UX / NAVIGATION UPDATE
+
+Purpose: make existing PHANTOM features easy to discover through a persistent sidebar,
+command-center landing page, quick-access module cards, and clear guided investigation path.
+
+INSTALL:
+1. Back up the complete PHANTOM folder.
+2. Stop the server with Ctrl+C.
+3. Extract this ZIP into the existing PHANTOM folder.
+4. Replace files when prompted.
+5. Start with:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+6. Open http://127.0.0.1:8000 and press Ctrl+F5.
+
+This is a UI/navigation update only. It replaces:
+  app/static/index.html
+  app/static/app.js
+  app/static/styles.css
+
+It does NOT replace backend modules, detection rules, .env, .venv, or data.
+The UI uses the existing PHANTOM 4.0 endpoints:
+  /api/advanced/overview, /api/live, /api/events, /api/history,
+  /api/file-integrity, /api/chat
+
+If an endpoint is unavailable in your installed backend, that module will show an
+error or empty state; do not assume the feature is operational until tested.

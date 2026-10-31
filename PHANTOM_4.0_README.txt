@@ -1,0 +1,43 @@
+PHANTOM 4.0 — HYBRID LOCAL SECURITY UPDATE
+
+Compatible with the PHANTOM 3.0 project structure shown in your screenshots.
+This is an additive update: it does not replace your virtual environment, .env, or SQLite database.
+
+WHAT IT ADDS
+- Read-only active network connection snapshot (psutil)
+- Parent/child process context
+- Explainable behavioral heuristics
+- MITRE ATT&CK technique references
+- Editable local indicator file: data/threat_indicators.json
+- Advanced dashboard panels and AI context integration
+
+INSTALL
+1. Stop the PHANTOM server with Ctrl+C.
+2. Back up the entire PHANTOM folder.
+3. Extract this ZIP into the existing PHANTOM folder.
+4. Choose Replace files if Windows asks. The ZIP contains app/main.py and app/static/index.html/app.js; these are updated integration files.
+5. Keep your existing .venv, .env, data/phantom.db and Ollama installation.
+6. In PowerShell, from the PHANTOM folder run:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+7. Open http://127.0.0.1:8000 and press Ctrl+F5.
+8. Click REFRESH INTELLIGENCE in the Hybrid Security Overview section.
+
+DEPENDENCIES
+No new Python package is required. The update uses psutil already installed by PHANTOM 3.0.
+
+LOCAL INDICATORS
+Edit data/threat_indicators.json. Supported keys: sha256, process_names, domains.
+The current MVP actively matches process_names. SHA-256 and domains are reserved for the next enrichment stage.
+Do not add unverified indicators.
+
+SAFETY AND LIMITATIONS
+- Monitoring is read-only. No process termination, quarantine, deletion, or firewall changes.
+- Network connection visibility may be incomplete without elevated permissions.
+- Behavioral detections are investigative leads, not malware verdicts.
+- MITRE ATT&CK mappings describe technique patterns, not attribution.
+- The initial indicator file is intentionally empty; there is no live external threat feed.
+- Ollama remains local; PHANTOM does not upload telemetry.
+
+TROUBLESHOOTING
+If port 8000 is already in use, do not start a second server. Reuse the existing browser session, or stop the old server with Ctrl+C in its terminal.
+If the UI looks unchanged, press Ctrl+F5.

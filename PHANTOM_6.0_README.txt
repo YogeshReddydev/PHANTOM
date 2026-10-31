@@ -1,0 +1,37 @@
+PHANTOM 6.0 — ADVANCED DETECTION + UI EDITION
+
+This package combines the PHANTOM 6.0 read-only detection engine with the complete PHANTOM 5.0 navigation UI and a visual refinement pass.
+
+UI improvements:
+- Persistent module navigation and quick discovery
+- Clear command-center cards and readable typography
+- Refined dark graphite / emerald / cyan palette
+- Subtle hover, entrance, and brand animations
+- Responsive layout and reduced-motion accessibility support
+- Manrope + DM Mono font stack with system fallbacks
+
+Detection capabilities:
+- Local process and network behavior inspection
+- Explainable heuristic leads and evidence
+- Parent/child process context
+- MITRE ATT&CK references
+- No automatic process termination, deletion, quarantine, or firewall changes
+
+Important:
+- Heuristic findings are investigation leads, not malware verdicts.
+- Network visibility depends on Windows permissions.
+- Google Fonts are requested by the stylesheet when internet is available; system fallbacks are used otherwise. The backend and local inference can still run locally.
+
+INSTALLATION
+1. Stop the PHANTOM server with Ctrl+C.
+2. Back up your complete existing PHANTOM folder.
+3. Extract this ZIP into the existing PHANTOM folder.
+4. Choose Replace files if prompted.
+5. Keep your existing .venv, .env, data folder, and SQLite database.
+6. Start from the PHANTOM folder:
+
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+7. Open http://127.0.0.1:8000 and press Ctrl+F5.
+
+The package includes app/main.py, app/detection_engine.py, and all three frontend assets under app/static/.

@@ -1,0 +1,56 @@
+PHANTOM 7.0 — THREAT INTELLIGENCE & INCIDENT INVESTIGATION
+
+This update builds on PHANTOM 6.0 and adds:
+- Local IOC register for IP addresses, domains, SHA-256 hashes and process names.
+- Exact local matching against current process and network telemetry.
+- Bounded SHA-256 checks for accessible process executable files up to 100 MB.
+- Local incident case creation and status tracking (open, investigating, contained, resolved, closed).
+- IOC scan and incident activity events added to the existing security event timeline.
+- New Threat Intelligence Center and Incident Management screens.
+
+THREE-COLOUR VISUAL IDENTITY
+- Midnight Navy: primary workspace and panels
+- Electric Teal: primary actions, active navigation and live status
+- Soft Violet: secondary accents, links and supporting visual emphasis
+Severity colors (amber/orange/red) remain reserved for warning levels and are not part of the main three-colour identity.
+
+IMPORTANT LIMITATIONS
+- IOC matching is exact and local. It does not establish that an item is malicious.
+- Domain indicators can be stored, but are not matched because the current endpoint telemetry does not capture DNS query events.
+- Public IP classification is not reputation intelligence.
+- External threat-feed downloads are not enabled in this build. This version does not send endpoint data to external services.
+- No automatic process termination, deletion, quarantine or firewall changes are performed.
+- SHA-256 checks skip inaccessible files and files larger than 100 MB.
+
+DATA
+- New PHANTOM 7.0 records are stored in data/phantom7.db.
+- Existing PHANTOM databases and history are preserved.
+- Back up the full project folder before applying the update.
+
+INSTALLATION
+1. Stop the running server with Ctrl+C.
+2. Back up the entire PHANTOM folder.
+3. Extract this ZIP into the existing PHANTOM folder.
+4. Choose Replace files when prompted.
+5. Keep .venv, .env, existing data files and the SQLite database.
+6. Start the server from the PHANTOM folder:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+7. Open http://127.0.0.1:8000 and press Ctrl+F5.
+
+NEW API ROUTES
+GET    /api/v7/iocs
+POST   /api/v7/iocs
+DELETE /api/v7/iocs/{ioc_id}
+POST   /api/v7/intel/scan
+GET    /api/v7/intel/matches
+GET    /api/v7/incidents
+POST   /api/v7/incidents
+PATCH  /api/v7/incidents/{incident_id}
+
+VERIFICATION PERFORMED
+- Python syntax compilation for main.py, detection_engine.py and phantom7.py.
+- JavaScript syntax check.
+- DOM ID reference check.
+- Local IOC add/list/delete smoke test.
+
+Final integration verification must be performed on the user's Windows environment.

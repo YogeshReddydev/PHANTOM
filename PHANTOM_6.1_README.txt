@@ -1,0 +1,24 @@
+PHANTOM 6.1 — SOC VISUAL POLISH UPDATE
+
+This update builds on PHANTOM 6.0 SOC Dashboard Edition.
+It retains the existing backend, detection engine, API routes, and dashboard data behavior.
+
+Visual improvements:
+- Larger and more readable typography
+- Higher contrast for labels and supporting text
+- Refined graphite, emerald, cyan, amber and red palette
+- Improved sidebar and navigation readability
+- Better panel spacing and visual hierarchy
+- Stronger hover and focus states
+- Responsive layout retained
+
+INSTALLATION
+1. Stop the PHANTOM server with Ctrl+C.
+2. Back up the complete PHANTOM folder.
+3. Extract this ZIP into the existing PHANTOM folder and replace files.
+4. Keep .venv, .env, and data/SQLite files.
+5. Start:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+6. Open http://127.0.0.1:8000 and press Ctrl+F5.
+
+This is a visual update; it does not add new detection capabilities.

@@ -1,0 +1,20 @@
+PHANTOM 6.0 — SOC RELIABILITY PATCH
+
+This package retains the PHANTOM 6.0 detection backend and SOC dashboard, and fixes the dashboard data consistency issue.
+
+Fixes:
+- Uses PHANTOM 6.0 deep-analysis findings as the single source for the investigation-lead KPI, alert distribution, latest leads, detection list, and MITRE mapping.
+- Prevents duplicate simultaneous manual refreshes.
+- Refreshes the process activity preview when the live process snapshot arrives.
+- Preserves the existing local-first, read-only behavior and all API routes.
+
+INSTALLATION
+1. Stop the server with Ctrl+C.
+2. Back up the full PHANTOM folder.
+3. Extract this ZIP into the existing PHANTOM folder and replace files.
+4. Keep .venv, .env, data/, and the SQLite database.
+5. Start:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+6. Open http://127.0.0.1:8000 and press Ctrl+F5.
+
+The package includes the PHANTOM 6.0 backend, detection engine, dashboard HTML, JavaScript, CSS, and README.

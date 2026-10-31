@@ -1,0 +1,57 @@
+PHANTOM 8.0 — AUTOMATED SECURITY OPERATIONS
+
+This is an incremental overlay for an existing PHANTOM 7.0 installation. It preserves the existing 7.0 threat-intelligence and incident-management modules and adds automatic local monitoring, persistent alerts and basic security analytics.
+
+NEW IN 8.0
+- Automatic background monitoring starts when the FastAPI application starts.
+- Read-only behavioral analysis runs every 90 seconds.
+- Local IOC matching runs every 300 seconds (including configured process-name, IP and accessible executable SHA-256 indicators).
+- Persistent alert center with severity, evidence, first/last seen, occurrence count and acknowledgement.
+- Duplicate alert records are suppressed by a stable fingerprint; repeated sightings update the occurrence count.
+- High/critical behavioral findings can automatically create an open incident case. Medium behavioral and IOC matches create alerts only.
+- Monitoring health endpoint reports running state, last scan, next scan countdown, errors and alert totals.
+- Basic analytics for alerts by severity/source and recent monitoring runs.
+- Existing Midnight Navy, Electric Teal and Soft Violet visual identity is retained.
+
+AUTOMATION MODEL
+- Monitoring starts automatically after the PHANTOM web server starts. This package does not register PHANTOM to launch at Windows sign-in; the server must still be started using the existing run command or a separately configured Windows startup task.
+- The browser dashboard polls alert/health status every 15 seconds and analytics every 60 seconds. Monitoring itself runs on the backend and does not depend on the dashboard tab being open.
+- The monitoring worker is a single in-process daemon thread. Run one Uvicorn worker only. Do not start multiple worker processes, or each process would run its own monitor loop.
+- Default interval: 90 seconds for behavior, 300 seconds for IOC matching. These are conservative defaults and can be adjusted in app/phantom8.py.
+
+ALERTING AND SAFETY
+- In-app dashboard notifications and persistent alert history are provided. Browser/OS notifications are not requested automatically.
+- Heuristic detections and IOC matches are investigation leads, not proof of malware.
+- Exact process-name indicators may match ordinary software; choose trusted IOCs carefully.
+- High/critical behavioral detections create a case for review; this is not a confirmed incident verdict.
+- No automatic process termination, file deletion, quarantine, firewall modification or other destructive response is performed.
+- Endpoint data and alert processing remain local. No external threat feeds are contacted.
+
+INSTALLATION
+1. Stop the PHANTOM server with Ctrl+C.
+2. Back up the entire PHANTOM folder, especially data/ and the SQLite databases.
+3. Extract this ZIP into the existing PHANTOM 7.0 project folder and replace the listed files.
+4. Keep all other existing files, including .venv, .env, data/, database.py, monitor.py, local_ai.py, and existing SQLite databases.
+5. Start from the PHANTOM project folder using the same single-worker command:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+6. Open http://127.0.0.1:8000 and press Ctrl+F5.
+7. Open Alert Center. Wait for the first monitoring cycle to complete. The first IOC scan can take longer if many SHA-256 indicators are configured.
+
+NEW API ROUTES
+GET  /api/v8/health
+GET  /api/v8/alerts
+POST /api/v8/alerts/{alert_id}/acknowledge
+GET  /api/v8/analytics
+
+LOCAL DATA
+New monitoring data is stored in data/phantom8.db. Existing PHANTOM 6/7 data is not overwritten.
+
+VERIFICATION PERFORMED IN BUILD ENVIRONMENT
+- Python syntax compilation for main.py and phantom8.py.
+- JavaScript syntax validation.
+- Frontend DOM-ID reference check.
+- Alert database smoke test covering create/list/acknowledge/analytics.
+- Full Windows runtime integration, live endpoint scanning and long-duration stability still require testing on the target Windows machine.
+
+IMPORTANT DEPLOYMENT NOTE
+Use exactly one Uvicorn worker. If you later deploy multiple workers or multiple app instances, move the monitor into a separate singleton service before enabling it there.

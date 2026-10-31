@@ -1,0 +1,34 @@
+PHANTOM 9.0 — HALLMARK-INSPIRED PRODUCT REDESIGN
+
+This is a design-system redesign of the existing PHANTOM 9.0 UI, based on Hallmark's documented design principles and Cobalt material as an inspiration:
+https://github.com/Nutlope/hallmark
+
+Hallmark is MIT-licensed. This update does not copy its theme file or scripts wholesale. It applies related principles to PHANTOM's own product UI:
+- Purpose-built evidence-ledger visual language rather than generic AI dashboard cards.
+- Cool neutral paper, graphite surfaces and a restrained cobalt accent.
+- Familjen Grotesk / IBM Plex Sans / JetBrains Mono type roles with system fallbacks.
+- Sentence-case labels, less tracking, readable typography and tabular numeric figures.
+- Hairline rules, cut-down surface effects, key-like tactile buttons and focused motion.
+- Responsive layouts, clear focus states and reduced-motion support.
+- Retains PHANTOM's real telemetry, alert, case, IOC, local AI and report interactions.
+
+Important:
+- Google Fonts are loaded from Google Fonts if the browser has internet access. System fallback fonts are defined for offline use.
+- All live evidence comes from the existing PHANTOM API routes. No sample alert counts have been invented.
+- This package is a frontend redesign only. It does not change backend routes, databases or monitoring logic.
+
+INSTALLATION
+1. Stop PHANTOM with Ctrl+C.
+2. Back up the entire project folder.
+3. Extract this ZIP into the existing PHANTOM folder and replace the included static files.
+4. Keep .venv, .env, data/, all databases, and backend files unchanged.
+5. Restart the server with your existing command.
+6. Open http://127.0.0.1:8000 and press Ctrl+F5.
+
+CHECKS
+- JavaScript syntax
+- DOM ID references
+- All existing PHANTOM 9.0 endpoints remain in the copied frontend
+- Visual styles contain reduced-motion and responsive rules
+
+Reference: Nutlope/Hallmark, MIT License, README and Cobalt material.

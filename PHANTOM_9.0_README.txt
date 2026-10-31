@@ -1,0 +1,42 @@
+PHANTOM 9.0 — AI INVESTIGATION & EVIDENCE INTELLIGENCE
+Incremental update for an existing PHANTOM 8.0 installation.
+
+WHAT'S NEW
+1. Evidence Intelligence workspace in the dashboard.
+2. Correlation view combining PHANTOM 8.0 alerts, PHANTOM 7.0 incidents and recent event timeline records.
+3. Local AI investigation endpoint that passes collected evidence to the existing local Ollama/Qwen investigation function.
+4. Downloadable JSON and HTML investigation reports.
+5. Retains PHANTOM 7.0 IOC and incident management and PHANTOM 8.0 automatic monitoring/alerting.
+
+IMPORTANT
+- This is an incremental update, not a standalone application.
+- Requires your existing PHANTOM 8.0 installation and its other app modules/dependencies.
+- AI analysis requires Ollama to be running and the model already configured in PHANTOM. If unavailable, the evidence and report features still work; AI analysis returns an unavailable message.
+- Correlation is based on available IDs, process names/PIDs and stored incident text. It is an investigative aid, not proof of causation.
+- Reports contain locally stored endpoint evidence. Store and share them carefully.
+- No process termination, file deletion, quarantine or firewall changes are performed.
+
+INSTALLATION
+1. Stop the running PHANTOM server with Ctrl+C.
+2. Back up the entire PHANTOM project folder.
+3. Extract this ZIP into the existing PHANTOM folder and replace the listed files.
+4. Do not delete or replace .venv, .env, data/, phantom7.db or phantom8.db.
+5. Start from the PHANTOM project folder:
+   .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+6. Open http://127.0.0.1:8000 and press Ctrl+F5.
+7. Open Investigation > Evidence Intelligence.
+
+NEW API ROUTES
+GET  /api/v9/evidence
+POST /api/v9/ai-investigate  {"question":"..."}
+GET  /api/v9/report.json
+GET  /api/v9/report.html
+
+CHECKS PERFORMED
+- Python syntax compilation for main.py and phantom9.py.
+- JavaScript syntax check.
+- Dashboard element-reference check.
+- Route presence check.
+
+WINDOWS RUNTIME TESTING
+Please verify the Evidence Intelligence page loads, JSON/HTML report downloads work, and local AI responds when Ollama is running. This package has not been executed on your Windows endpoint from this environment.
