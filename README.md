@@ -181,7 +181,25 @@ PHANTOM/
 
 The interface redesign is an original PHANTOM adaptation informed by the design principles in [Nutlope/Hallmark](https://github.com/Nutlope/hallmark), which is MIT-licensed. PHANTOM does not bundle Hallmark's scripts or theme files.
 
-## License
+
+## PHANTOM in Action
+
+The following screenshots show the application running on a Windows endpoint.
+
+### Command Center
+![PHANTOM Command Center](docs/screenshots/command-center.jpg)
+
+### Live Process Monitor
+![PHANTOM Process Monitor](docs/screenshots/process-monitor.jpg)
+
+### Automatic Alert Center
+![PHANTOM Alert Center](docs/screenshots/alert-center.jpg)
+
+### Threat Intelligence Center
+![PHANTOM Threat Intelligence](docs/screenshots/threat-intelligence.jpg)
+
+> Note: The Python process-name IOC shown in the test screenshots is a demonstration indicator, not a confirmed malware detection.
+
 
 ## License
 
