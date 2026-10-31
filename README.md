@@ -183,4 +183,7 @@ The interface redesign is an original PHANTOM adaptation informed by the design 
 
 ## License
 
-No repository license file is currently included. Add a license before inviting reuse or accepting contributions; do not assume a license from the Hallmark inspiration applies to PHANTOM.
+## License
+
+PHANTOM is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for details.
